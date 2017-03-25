@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/facelets/plantillas/template.xhtml">
+
+            <ui:define name="content">
+
+
+                <h:panelGrid columns="2" style="background-color:  transparent">
+                    <h:graphicImage id="clienteIcon"  style="background-color:  transparent" class="icon" name="/img/cliente.png"  height="60" width="60"/>
+                    <p:outputLabel for="clienteIcon" value="CLIENTES" style="color: white;background-color:  transparent"/>            
+                </h:panelGrid>
+
+
+
+                <div class="center">
+
+                    <div class="izquierda">
+                        <p:outputLabel for="Buscar" value="Buscar Por Nombre" style="color: whitesmoke"/>
+                        <p:inputText id="Buscar"  required="true" label="Firstname">
+                        </p:inputText>
+                    </div>
+
+                    <div class="derecha">
+                        <p:commandButton value="Nuevo Cliente" icon="ui-icon-circle-plus" onclick="PF('agregarCliente').show();"/>
+                    </div>
+                </div>
+
+                <h:form id="form" style="text-align: center">
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <br/>
+
+                    <p:dataTable  value="#{clienteController.clientes}" var="cliente"  editable="true" style="margin:20px">
+                        <f:facet name="header">
+                            Clientes
+                        </f:facet>
+
+
+                        <p:column headerText="DUI" style="width:80px">
+                            <h:outputText value="#{cliente.dui}"  />
+                        </p:column>
+
+                        <p:column headerText="NIT"  style="width:130px">
+                            <h:outputText value="#{cliente.nit}"  />
+                        </p:column>
+
+                        <p:column headerText="NOMBRE" style="width:100px">
+                            <h:outputText value="#{cliente.nombre}"  />
+                        </p:column>
+
+                        <p:column headerText="APELLIDOS" style="width:110px">
+                            <h:outputText value="#{cliente.apellido}"  />
+                        </p:column>
+
+                        <p:column headerText="SEXO" style="width:40px">
+                            <h:outputText value="#{cliente.sexo}"  />
+                        </p:column>
+
+
+                        <p:column headerText="FECHA DE NACIMIENTO" style="width:80px">
+                            <h:outputText value="#{cliente.fechaNacimiento}"  />
+                        </p:column>
+
+                        <p:column headerText="DIRECCION" style="width:80px">
+                            <h:outputText value="#{cliente.direccion}"  />
+                        </p:column> 
+
+                        <p:column headerText="TELEFONO" style="width:63px">
+                            <h:outputText value="#{cliente.telefono}"  />
+                        </p:column>
+
+                        <p:column style="width:42px">
+                            <p:commandButton icon="ui-icon-info" style="width: 25px;height: 25px;font-size: 5px;background-color: #00a0df" ajax="false" action="perfil"/>
+                            <p:commandButton icon="ui-icon-close" style="width: 25px;height: 25px;font-size: 5px; background-color: greenyellow" ajax="false"     />
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>
+
+
+                <h:form id="formulario">
+                    <p:dialog  id="dialog" modal="true" style="background-color:#EFEDEF" showEffect="blind" hideEffect="blind" widgetVar="agregarCliente"  width="60%" height="10%" header="Agregar Clientes"  draggable="false" closeOnEscape="true" resizable="false">
+
+                        <h:panelGrid id="grid" columns="3"  cellpadding="1">
+
+                            <p:outputLabel  for="dui" value="Dui: "/>
+                            <p:inputMask id="dui" mask="99999999-9" required="true" size="40" />
+                            <p:message for="dui" display="text" />
+
+                            <p:outputLabel  for="nit" value="Nit: " />
+                            <p:inputMask id="nit" mask="9999-999999-999-9" required="true" size="40"  />
+                            <p:message for="nit" display="text" /> 
+
+                            <p:outputLabel  for="nombre" value="Nombres: "  />
+                            <p:inputText  id="nombre" required="true"  size="40"  />
+                            <p:message for="nombre" display="text" />
+
+                            <p:outputLabel  for="apellido" value="Apellidos: "  />
+                            <p:inputText  id="apellido" required="true"  size="40"  />
+                            <p:message for="apellido" display="text" />   
+
+                            <p:outputLabel  for="sexo" value="Sexo: "/>
+                            <p:selectOneRadio id="sexo" required="true">
+                                <f:selectItem  itemLabel="Masculino" itemValue="masculino"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="femenino"/>  
+                            </p:selectOneRadio>
+                            <p:message for="sexo" display="text" />
+
+                            <p:outputLabel for="direccion" value="Direccion: "/>
+                            <p:inputTextarea id="direccion" rows="6" cols="40" autoResize="true"  required="true" />
+                            <p:message for="direccion" display="text" />
+
+                            <p:outputLabel for="telefono" value="Telefono: " />
+                            <p:inputMask  id="telefono" mask="9999-9999"    required="true" size="40" />
+                            <p:message for="telefono" display="text" />
+
+                            <p:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento: " />
+                            <p:calendar  id="fechaNacimiento" required="true" locale="de" size="40"  pattern="yyyy-MM-dd" effect="blind" navigator="true" showOn="button" yearRange="-100:+0" />
+                            <p:message for="fechaNacimiento" display="text" />
+
+                            <p:outputLabel for="observaciones"   value="Observaciones:  " />
+                            <p:inputTextarea id="observaciones"    rows="6" cols="40" autoResize="true" />
+
+
+                            <p:commandButton  value="Cancelar" icon="ui-icon-cancel" />
+                            <p:commandButton update="grid"  value="Registrar" icon="ui-icon-disk"    />
+
+
+                        </h:panelGrid>
+
+                    </p:dialog>
+
+
+                </h:form>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

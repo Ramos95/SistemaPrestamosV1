@@ -1,0 +1,34 @@
+body {
+    font-size: 15px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+}
+/*
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+*/
+
+h1 {
+    color: gray;
+    font-size: 24px;
+}
+.center_content {
+    padding-top: 15px;
+}
+
+.content {
+    margin-left: 280px;
+}
+
+ .pago-icon {
+     width: 16px;
+     height: 16px;
+    background-image: url(../resources/img/agregar1.png") !important;
+}
+

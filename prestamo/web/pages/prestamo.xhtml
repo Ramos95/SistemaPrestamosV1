@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/facelets/plantillas/template.xhtml">
+
+            <ui:define name="content">
+
+                <h:panelGrid columns="2" style="padding-top: 10px;padding-left: 24px ">
+                    <h:graphicImage class="icon" name="/img/notebook-5.png"  height="60" width="60"/>
+                    <p:outputLabel value="PRESTAMOS" style="color: white; "/>
+                </h:panelGrid>
+
+                <div class="center">
+
+                    <div class="izquierda">
+                        <p:outputLabel style="color: whitesmoke" value="Buscar por nombre:"/>
+                        <p:autoComplete id="buscar" />
+                    </div>
+
+                    <div class="derecha">
+                        <p:commandButton  icon="ui-icon-circle-plus" value="Nuevo Prestamo" onclick="PF('Nprestamo').show();"/>
+                    </div>
+
+                </div>
+
+                <p:separator/>
+
+                <h:form id="formTable">
+                    <p:dataTable id="prestamos1" var="prestamos" value="#{dtEdit.prestamos1}"  editable="true" style="margin:20px" >
+                        <f:facet name="header">
+                            Historial de Prestamos
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{dtEdit.onRowEdit}"  />
+                        <p:ajax event="rowEditCancel" listener="#{dtEdit.onRowCancel}" />
+
+                        <p:column headerText="No. De prestamo" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.numero}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{prestamos.id}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="DUI"  style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.year}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{prestamos.year}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Cliente" style="width:200px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.brand}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Monto" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.price}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Saldo" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.price}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="Cuotas" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.brand}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+
+                        <p:column style="width:32px">
+
+                            
+                                <p:commandButton icon="ui-icon-info" style="width: 25px;height: 25px;font-size: 5px;background-color: #00a0df" onclick="PF('Dprestamo').show();" ajax="false" action="detallePrestamo"/>
+                                <p:commandButton icon="ui-icon-calculator" style="width: 25px;height: 25px;font-size: 5px; background-color: greenyellow" ajax="false" action="pago" />
+                            
+
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>
+
+
+                <h:form id="dialog">
+
+                    <p:dialog  modal="true" style="background-color:#EFEDEF" showEffect="blind" hideEffect="blind" widgetVar="Nprestamo"  width="60%" height="50%"  header="Nuevo Prestamo"  draggable="false" closeOnEscape="true" resizable="false">
+
+                        <h:panelGrid id="grid" columns="2" cellpadding="1">
+
+                            <p:outputLabel  for="cliente" value="Cliente: "/>
+                            <p:selectOneMenu id="cliente" >
+                                <f:selectItem itemLabel="Javier Morales"  />
+                                <f:selectItem itemLabel="Kevin Rodriguez"  />
+                                <f:selectItem itemLabel="Estuardo Ramos"  />
+                                <f:selectItem itemLabel="Alfredo Sensente"  />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel  for="monto" value="Monto Total: " />
+                            <p:inputNumber id="monto" value="00.00" decimalSeparator="." thousandSeparator="," required="true" size="40"/>
+
+
+                            <p:outputLabel  for="ncuotas" value="No Cuotas: " />
+                            <p:inputNumber id="ncuotas" decimalSeparator="none" required="true" size="40"/>
+
+
+                            <p:outputLabel for="inicio" value="Fecha de inicio: "  />
+                            <p:calendar pattern="yyyy-MM-dd" id="inicio" required="true" size="40"/>
+
+                            <p:outputLabel  for="vcuotas" value="Valor Cuotas: " />
+                            <p:inputNumber id="vcuotas" value="00.00" decimalSeparator="." thousandSeparator="," disabled="true" size="40"/>
+
+
+                            <p:outputLabel  for="fin" value="Fecha de Fin: "  />
+                            <p:calendar pattern="yyyy-MM-dd" id="fin" disabled="true" size="40"/>
+
+                            <p:outputLabel for="capita" value="Capitalizacion "  />
+                            <p:inputText id="capita" value="Mensual" disabled="true" size="40"/>
+
+
+                            <div class="center">
+                                <h:panelGrid  columns="2">
+                                    <p:commandButton  value="Calcular valores" icon="ui-icon-info" />
+                                    <p:commandButton  update="grid" value="Registrar" icon="ui-icon-circle-plus"   />
+                                </h:panelGrid>
+                            </div>
+
+                        </h:panelGrid>
+
+                    </p:dialog>
+
+
+                </h:form>
+
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

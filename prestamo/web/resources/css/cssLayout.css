@@ -1,0 +1,98 @@
+
+#top {
+    position: fixed;
+    background-color: #232323;
+    height: 60px;
+    margin: 0px 0px 0px 0px;
+    top:0; 
+    width: 100%;
+    left: 0;
+    padding-left: 0px;
+    padding: 0px;
+    border-color: white;
+    border: 20px;    
+}
+
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 30px;
+    padding-left:100px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+    height: 100%;
+    border-color: white;
+    border: 20px;
+}
+
+.right_content {
+    background-color: transparent;
+    padding: 52px;
+    margin: 0px 0px 0px 24px;
+    padding-left: 200px;
+    height: 100%;
+    position: inherit;
+    padding-right: 0px;
+}
+
+
+.center{
+    padding: 30px;
+    margin: 0 auto;
+    
+}
+
+.izquierda{
+    float: left;
+}
+
+.derecha{
+    float: right;
+}
+
+.sidenav {
+    height: 100%;
+    width: 17%;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    background-color: #349886;
+    padding-top: 0px;            
+    right: 25px;
+    border: 2px;
+    border-color: white;
+}
+
+
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #111;
+    display: block;
+    
+}
+
+.star {
+    background-image: url("../img/agregar1.png");
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.icon {
+    padding-right: 5px;
+    
+}
+

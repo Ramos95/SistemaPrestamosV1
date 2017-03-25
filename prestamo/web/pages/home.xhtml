@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+        <ui:composition template="./../WEB-INF/facelets/plantillas/template.xhtml">
+
+            <ui:define name="content">
+                <h:panelGrid columns="2" style="padding-top: 10px;padding-left: 24px ">
+                    <h:graphicImage  id="iconohome" class="icon" name="/img/house.png"  height="60" width="60"/>
+                    <p:outputLabel for="iconohome" value="INICIO" style="color: white; "/>
+                </h:panelGrid>
+                <p:separator/>
+                <br/>
+
+                <h:form id="prestamosPendientes">
+
+                    <p:dataTable id="prestamos" var="prestamos" value="#{dtEdit.prestamos1}"  editable="true" style="margin:20px" >
+                        <f:facet name="header">
+                            Prestamos Pendientes
+                        </f:facet>
+
+                        <p:ajax event="rowEdit" listener="#{dtEdit.onRowEdit}"  />
+                        <p:ajax event="rowEditCancel" listener="#{dtEdit.onRowCancel}" />
+
+                        <p:column headerText="No. De prestamo" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.numero}" /></f:facet>
+                                <f:facet name="input"><p:inputText id="modelInput" value="#{prestamos.id}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="DUI"  style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.year}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{prestamos.year}" style="width:100%" label="Year"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Cliente" style="width:200px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.color}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.brand}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Monto" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.price}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Saldo" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.price}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                        <p:column headerText="cuotas" style="width:80px">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prestamos.brand}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{prestamos.color}" style="width:100%">
+                                        <f:selectItems value="#{dtEdit.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+
+                        <p:column style="width:32px">
+                            <p:commandButton icon="ui-icon-info" style="width: 25px;height: 25px;font-size: 5px;background-color:#00a0df" ajax="false" action="detallePrestamo.jsf"/>
+                            <p:commandButton icon="ui-icon-calculator" style="width: 25px;height: 25px;font-size: 5px; background-color: greenyellow" ajax="false" action="pago.jsf" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
